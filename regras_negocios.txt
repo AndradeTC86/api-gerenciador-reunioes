@@ -1,0 +1,38 @@
+## Contexto
+
+Tenho uma empresa que possui vários times e algumas salas de reunião.
+Frequentemente, temos conflitos entre times que querem utilizar a mesma sala,
+mas não têm como saber que já está em uso. Preciso de um programa simples
+que resolva isso: agendamento e gerenciamento das salas de reunião.
+
+- Já existe um time que cuidará do visual
+- Preciso de uma API de uso interno
+- A aplicação deve ser acessível somente por funcionários
+
+## Regras
+
+- funcionario pode estar em mais de 1 time
+- Acessivel somente por funcionarios
+- Ter mais de 1 sala de reuniao
+- Qualquer funcionario agenda
+- Apenas 1 funcionario (admin) gerencia
+- Nao pode ter conflito de horario/dia
+- Agendamento deve ter horario de inicio e fim
+- Travar agendamento no passado (now em diante)
+- Nao é possivel excluir sala com agendamento
+- Duração máxima de agendamento = 1 dia (8 horas)
+- Liberar sala apos fim do agendamento
+- 1 sala pode ter mais de 1 agendamento (horarios diferentes)
+- 1 funcionario nao pode agendar +1 sala no mesmo horário
+- Funcionario so pode deletar agendamento dele
+- Admin pode deletar agendamento de qualquer sala
+
+## Endpoints
+
+- POST   /login
+- POST   /reservarSala
+- PUT    /ajustarAgendamento
+- GET    /listarSalas
+- GET    /listarSalas/:id
+- DELETE /deletarAgendamento
+- DELETE /apagarSala
