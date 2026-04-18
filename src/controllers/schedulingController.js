@@ -14,7 +14,7 @@ function reservarSala(req, res) {
   const { roomId, start, end, title } = req.body;
 
   if (!roomId || !start || !end || !title) {
-    return res.status(400).json({ error: 'roomId, start, end e title são obrigatórios.' });
+    return res.status(400).json({ error: 'Informe roomId, start, end e title para reservar a sala.' });
   }
 
   const result = schedulingService.createSchedule({

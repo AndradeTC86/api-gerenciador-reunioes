@@ -17,19 +17,19 @@ function validateDateRange(start, end) {
   const endDate   = new Date(end);
 
   if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-    return 'Datas inválidas. Use o formato ISO 8601 (ex: 2026-05-10T14:00:00).';
+    return 'As datas informadas são inválidas. Use o formato ISO 8601, como 2026-05-10T14:00:00.';
   }
   if (startDate <= now) {
-    return 'O agendamento deve ser para uma data/hora futura.';
+    return 'Não é possível agendar com horário inicial anterior ao momento atual.';
   }
   if (endDate <= startDate) {
-    return 'O horário de término deve ser posterior ao horário de início.';
+    return 'A hora final da reserva deve ser maior que a hora inicial.';
   }
   if (endDate - startDate > MAX_DURATION_MS) {
-    return 'A duração máxima permitida por agendamento é de 8 horas.';
+    return 'A reserva não pode ultrapassar 8 horas de duração.';
   }
   if (startDate - now > MAX_ADVANCE_MS) {
-    return 'Agendamentos podem ser feitos com no máximo 90 dias de antecedência.';
+    return 'A reserva pode ser criada com no máximo 90 dias de antecedência.';
   }
 
   return null;
@@ -81,16 +81,23 @@ function createSchedule({ userId, roomId, start, end, title }) {
   if (dateError) return { error: dateError, status: 400 };
 
   if (!db.rooms.find(r => r.id === id)) {
-    return { error: 'Sala não encontrada.', status: 404 };
+    return { error: 'Sala informada não encontrada.', status: 404 };
   }
   if (checkRoomConflict(id, start, end)) {
-    return { error: 'Conflito de horário: sala já reservada neste período.', status: 409 };
+    return { error: 'Não é possível agendar em horário já reservado para esta sala.', status: 409 };
   }
   if (checkUserConflict(userId, start, end)) {
-    return { error: 'Conflito de horário: você já possui uma reserva neste período.', status: 409 };
+    return { error: 'Não é possível agendar duas reservas no mesmo horário para o mesmo funcionário.', status: 409 };
   }
 
-  const schedule = { id: db.getNextScheduleId(), userId, roomId: id, start, end, title };
+  const schedule = {
+    id: db.getNextScheduleId(),
+    userId,
+    roomId: id,
+    start,
+    end,
+    title,
+  };
   db.schedules.push(schedule);
   return { data: schedule };
 }
