@@ -36,3 +36,14 @@ que resolva isso: agendamento e gerenciamento das salas de reunião.
 - GET    /listarSalas/:id
 - DELETE /deletarAgendamento
 - DELETE /apagarSala
+
+## Equipe
+
+- Soraya da Costa (Scrum Master)
+- Gabriel dos Santos (PO)
+- Camila Brito (Tester)
+- Aline Leopoldino (Tester)
+- Gilson Rodrigues (Dev)
+- Marcelo Souza (Dev)
+- Victor Leuthier (Dev)
+- Thiago Andrade (Dev) 
