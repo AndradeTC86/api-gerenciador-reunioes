@@ -1,0 +1,19 @@
+{
+  "name": "api-gerenciador-reunioes",
+  "version": "1.0.0",
+  "description": "API REST para agendamento de salas de reunião corporativas",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
